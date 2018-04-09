@@ -1,10 +1,12 @@
 import numpy as np
 import time
 
+limite_inferior = 0
+limite_superior = 1000000
 
-# Gera valores inteiros aleatorios de 1 ate 100000
-def gera_valor_aleatorio():
-    valor = np.random.randint(0, 100000000)
+# Gera valores inteiros aleatorios de limite_inferior ate limite_superior
+def gera_valor_aleatorio(limite_inf=limite_inferior, limite_sup=limite_superior):
+    valor = np.random.randint(limite_inf, limite_sup)
     return valor
 
 
@@ -93,8 +95,8 @@ def main():
 # Recebe o limite superior do vetor de valores aleatorios e realiza a ordenacao
 def performance():
 
-    for i_tamanho in range(100):
-        tamanho = ((100-i_tamanho) * 10000)+990001
+    for i_tamanho in range(10):
+        tamanho = gera_valor_aleatorio()
         vetor = []
         vetor_ordenado = []
         vetor = gera_lista(tamanho)
@@ -108,5 +110,5 @@ def performance():
         print('Tempo para ordenacao: ', end - start)
 
 if __name__ == '__main__':
-    # main()
-    performance()
+    main()
+    # performance()
