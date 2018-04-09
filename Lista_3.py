@@ -4,7 +4,7 @@ import time
 
 # Gera valores inteiros aleatorios de 1 ate 100000
 def gera_valor_aleatorio():
-    valor = np.random.randint(0, 100000)
+    valor = np.random.randint(0, 100000000)
     return valor
 
 
@@ -19,7 +19,6 @@ def gera_lista(limite_superior):
 
 # Faz o merge de dois vetores do vetor principal
 def merge(vetor, left, mid, right):
-
     subvetor_esquerda = mid - left + 1
     subvetor_direita = right - mid
 
@@ -66,7 +65,7 @@ def merge_sort(vetor, left, right):
     if left < right:
 
         # right - 1 usado para evitar overflow
-        mid = (left+(right-1))/2
+        mid = int((left+(right-1))/2)
 
         merge_sort(vetor, left, mid)
         merge_sort(vetor, mid+1, right)
@@ -77,7 +76,7 @@ def merge_sort(vetor, left, right):
 
 # Recebe o limite superior do vetor de valores aleatorios e realiza a ordenacao
 def main():
-    tamanho = input('Digite o tamanho do vetor a ser gerado: \n')
+    tamanho = int(input('Digite o tamanho do vetor a ser gerado: \n'))
     vetor = []
     vetor_ordenado = []
     vetor = gera_lista(tamanho)
@@ -91,5 +90,23 @@ def main():
     print(vetor_ordenado)
     print('Tempo para ordenacao: ', end - start)
 
+# Recebe o limite superior do vetor de valores aleatorios e realiza a ordenacao
+def performance():
+
+    for i_tamanho in range(100):
+        tamanho = ((100-i_tamanho) * 10000)+990001
+        vetor = []
+        vetor_ordenado = []
+        vetor = gera_lista(tamanho)
+
+        start = time.time()
+        vetor_ordenado = merge_sort(vetor, 0, tamanho-1)
+        end = time.time()
+
+        with open('valores.txt', 'a') as f:
+            f.write("( {}, {}),\n".format(tamanho, end - start))
+        print('Tempo para ordenacao: ', end - start)
+
 if __name__ == '__main__':
-    main()
+    # main()
+    performance()
