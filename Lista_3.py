@@ -94,9 +94,12 @@ def main():
 
 # Recebe o limite superior do vetor de valores aleatorios e realiza a ordenacao
 def performance():
-
-    for i_tamanho in range(10):
-        tamanho = gera_valor_aleatorio()
+    k=100
+    # limite_inferior = 0
+    # limite_superior = 1000000
+    for f in range(k):
+        i=int(limite_inferior+((limite_superior - limite_inferior)*(1.0*f/k)))
+        tamanho = i
         vetor = []
         vetor_ordenado = []
         vetor = gera_lista(tamanho)
@@ -106,7 +109,7 @@ def performance():
         end = time.time()
 
         with open('valores.txt', 'a') as f:
-            f.write("( {}, {}),\n".format(tamanho, end - start))
+            f.write("{},{}\n".format(tamanho, end - start))
         print('Tempo para ordenacao: ', end - start)
 
 if __name__ == '__main__':
